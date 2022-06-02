@@ -11,7 +11,10 @@ Created a root account and setup MFA for added security
 
 created another user
 installed aws-vault using https://github.com/99designs/aws-vault 
-choco install aws-vault
-aws-vault add "new user"
 
-put in the creds
+```
+choco install aws-vault
+aws-vault add "new user" #put in the creds
+aws-vault exec DevOpsUser -- aws s3 ls
+
+```
