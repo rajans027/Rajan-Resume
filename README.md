@@ -66,7 +66,7 @@ deploy-site:
  
  Edited the template.yaml file for sam build with the below info. Purpose, to have the S3 read the html and CSS file. Also added the bucketpolicy to enable public access to the site.
  
- Changes made to the MyS3Bucket
+ Changes made to the MyS3Bucket in the template.yaml file
  
  ```
   MyS3Bucket:
