@@ -43,6 +43,8 @@ Run sam build again and then deploy without the --guided flag. Stacks succesfull
 
 error: during the first build, mistakenly renamed samconfig.toml to "y", when we run deploy again it needs to read from the samconfig.yaml, since the name was incorrect, I was unable to use sam deploy 
 
+After this stage, I could see the stacks in CloudFormation and the s3 bucket created
+
 
 ## Setting up S3 with HTML and CSS files
 
