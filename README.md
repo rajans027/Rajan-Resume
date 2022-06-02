@@ -21,7 +21,7 @@ aws-vault exec DevOpsUser -- aws s3 ls
 
 on IAM gave my new user the AmazonS3FullAccess 
 
-## Using AWS SAM
+## Using AWS SAM using Cloud formation
 Install using
 https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install-windows.html
 
@@ -31,3 +31,15 @@ cd in to CloudResume and run
 ``` 
 aws-vault exec DevOpsUser --no-session -- sam deploy --guided
 ```
+add a Resource in the template.yaml in this format
+
+```
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: my-fanstastic-website
+```
+Run sam build again and then deploy without the --guided flag. Stacks succesfully created on cloudformation and a S3 bucket with the name "my-fantastic-website" is generated
+
+
+      
