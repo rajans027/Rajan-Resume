@@ -98,4 +98,10 @@ deploy-site:
       Bucket: !Ref MyS3Bucket  
 ``` 
 
+Wesbite is now publicly accessible
+
+
+## CloudFront setup
+
+
       
