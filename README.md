@@ -98,10 +98,38 @@ deploy-site:
       Bucket: !Ref MyS3Bucket  
 ``` 
 
-Wesbite is now publicly accessible
+Wesbite is now publicly accessible at the endpoint provided by the Bucket http://my-fanstastic-website.s3-website-us-east-1.amazonaws.com
 
 
-## CloudFront setup
+## CloudFront setup and Route53 
+Created a new distribution with origin domain in the format:
+
+added below contents to template.yml. Build and deploy. 
+```
+  MyDistribution:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: allow-all
+          TargetOriginId: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
+          DefaultTTL: 0
+          MinTTL: 0
+          MaxTTL: 0
+          ForwardedValues:
+            QueryString: false
+        Origins:
+          - DomainName: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
+            Id: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+        Enabled: "true"
+        DefaultRootObject: index.html
+```
+Dont forget to mention in Default root object as index.html in CloudFront's distribution settings to avoid XML parsing errors
 
 
-      
+Moving on,  already had a domain www.blankfolio.com which I am going to use for this project
+Used ACM to generate a certificate for www.blankfolio.com and added routes to Route53. On my domain provider, Namecheap, updated nameservers to use AWS ones provided in route53.
+
+
