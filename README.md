@@ -130,7 +130,7 @@ Dont forget to mention in Default root object as index.html in CloudFront's dist
 
 
 Moving on,  already had a domain www.blankfolio.com which I am going to use for this project
-Used ACM to generate a certificate for www.blankfolio.com and added routes to Route53 using the option provided. On my domain provider, Namecheap, updated nameservers to use AWS ones provided in route53.
+Used ACM to generate a certificate for www.blankfolio.com and added routes to Route53 using the option provided (Create Records in Route53) . On my domain provider, Namecheap, updated nameservers to use AWS ones provided in route53.
 
 ACM created a zone for www.blankfolio.com in which I went ahead and created a simple A record enabling routing to cloudfront domain d1feck1sd1hyh2.cloudfront.net. when accessing blankfolio.com
 
