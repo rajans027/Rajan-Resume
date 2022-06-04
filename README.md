@@ -137,4 +137,11 @@ ACM created a zone for www.blankfolio.com in which I went ahead and created a si
 
 Back to the CloudFront distribution, added alternate domain name value in the field given i.e www.blankfolio.com 
 
+Frontend is complete and website is securely available on a custom Domain.
+
+
+## BACKEND
+
+
+
 
