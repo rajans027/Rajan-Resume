@@ -11,10 +11,10 @@ with open('Cloud-resume/template.yaml', 'r') as f:
 @mock.patch.dict(os.environ, {"TABLENAME": TABLENAME})
 def test_lambda_handler():
 
-    # check AWS credentials
-#     print(os.environ.keys())
-#     assert "AWS_ACCESS_KEY_ID" in os.environ
-#     assert "AWS_SECRET_ACCESS_KEY" in os.environ
+    check AWS credentials
+    print(os.environ.keys())
+    assert "AWS_ACCESS_KEY_ID" in os.environ
+    assert "AWS_SECRET_ACCESS_KEY" in os.environ
 
     ret = app.lambda_handler("", "")
 
