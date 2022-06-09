@@ -31,6 +31,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - run: cd Cloud-resume && sam build --use-container
-      - run: cd Cloud-resume && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+#       - run: cd Cloud-resume && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
       - name: Update static files with S3
         run: aws s3 cp Rajan-Resume/. s3://my-fanstastic-website/ --recursive
