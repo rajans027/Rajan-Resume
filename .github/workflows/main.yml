@@ -33,4 +33,4 @@ jobs:
       - run: cd Cloud-resume && sam build --use-container
 #       - run: cd Cloud-resume && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
       - name: Update static files with S3
-        run: aws s3 cp Rajan-Resume/. s3://my-fanstastic-website/ --recursive
+        run: aws s3 cp aws-crc-frontend-main/. s3://my-fanstastic-website/ --recursive
