@@ -11,20 +11,6 @@ Globals:
     Timeout: 3
 
 Resources:
-  # HelloWorldFunction:
-  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-  #   Properties:
-  #     CodeUri: hello_world/
-  #     Handler: app.lambda_handler
-  #     Runtime: python3.9
-  #     Architectures:
-  #       - x86_64
-  #     Events:
-  #       HelloWorld:
-  #         Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-  #         Properties:
-  #           Path: /hello
-  #           Method: get
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties: 
@@ -33,60 +19,25 @@ Resources:
       WebsiteConfiguration: 
         IndexDocument: index.html
 
-  MyDistribution:
-    Type: "AWS::CloudFront::Distribution"
-    Properties:
-      DistributionConfig:
-        DefaultCacheBehavior:
-          ViewerProtocolPolicy: allow-all
-          TargetOriginId: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
-          DefaultTTL: 0
-          MinTTL: 0
-          MaxTTL: 0
-          ForwardedValues:
-            QueryString: false
-      Origins:
-          - DomainName: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
-            Id: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
-            CustomOriginConfig:
-              OriginProtocolPolicy: match-viewer
-      Enabled: "true"
+#   MyDistribution:
+#     Type: "AWS::CloudFront::Distribution"
+#     Properties:
+#       DistributionConfig:
+#         DefaultCacheBehavior:
+#           ViewerProtocolPolicy: allow-all
+#           TargetOriginId: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
+#           DefaultTTL: 0
+#           MinTTL: 0
+#           MaxTTL: 0
+#           ForwardedValues:
+#             QueryString: false
+#       Origins:
+#           - DomainName: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
+#             Id: my-fanstastic-website.s3-website-us-east-1.amazonaws.com
+#             CustomOriginConfig:
+#               OriginProtocolPolicy: match-viewer
+#       Enabled: "true"
       
-  GetCountFunction:
-   Type: AWS::Serverless::Function
-   Properties:
-    Policies:
-      - DynamoDBCrudPolicy:
-          TableName: cloud-resume-challenge
-    CodeUri: get-function/
-    Handler: app.lambda_handler
-    Runtime: python3.9
-    Architectures:
-      - x86_64
-    Events:
-      HelloWorld:
-        Type: Api 
-        Properties:
-          Path: /get
-          Method: get
-
-  PutCountFunction:
-    Type: AWS::Serverless::Function 
-    Properties:
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: cloud-resume-challenge
-      CodeUri: put-function/
-      Handler: app.lambda_handler
-      Runtime: python3.9
-      Architectures:
-        - x86_64
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /put
-            Method: get
             
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
