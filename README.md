@@ -233,3 +233,5 @@ def lambda_handler(event, context):
     }
 }
 ```
+
+## Creating CICD pipeline using Github Actions
