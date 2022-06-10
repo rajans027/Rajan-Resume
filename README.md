@@ -140,7 +140,7 @@ Frontend is complete and website is securely available on a custom Domain.
 
 ## BACKEND
 
-##DynamoDB setup
+## DynamoDB setup
 
 The idea is to create a visitor's count functionality - API GATEWAY <----> Lambda Function <----> DynamoDB
 
@@ -203,11 +203,10 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Methods": "GET,OPTIONS",
         },
     }
-  
-   ```
+  ```
    
    
-    ### API gateway
+    ## API gateway
     
     IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
     Indicating that the function is ok and has the right permissions. 
