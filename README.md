@@ -233,5 +233,6 @@ def lambda_handler(event, context):
     }
 }
 ```
+Called this Js in our index.html code using the <script type='module' src="js/main.js" ></script>
 
 ## Creating CICD pipeline using Github Actions
