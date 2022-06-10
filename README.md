@@ -177,7 +177,7 @@ def lambda_handler(event, context):
     # Set dynamodb table name variable from env
     #ddbTableName = os.environ["cloud-resume-challenge"]
     table = dynamodb.Table("cloud-resume-challenge")
-    # table = dynamodb.Table("tvq-cloud-resume-counter")
+  
 
     # Atomic update item in table or add if doesn't exist
     ddbResponse = table.update_item(
@@ -203,9 +203,10 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Methods": "GET,OPTIONS",
         },
     }
-    
+  
    ```
-    
+   
+   
     ### API gateway
     
     IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
