@@ -161,7 +161,7 @@ Setup a simple DynamoDB table, added the following snippet to the template.yaml 
           KeyType: HASH
 ```
 
-##Lambda function
+## Lambda function
 
 In AWS UI, created a new lambda function using boto3 library to converse with DynamoDb table
 
@@ -203,9 +203,11 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Methods": "GET,OPTIONS",
         },
     }
-  ```
+ ```
    
    
+   
+  
     ## API gateway
     
     IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
