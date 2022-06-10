@@ -164,6 +164,7 @@ Setup a simple DynamoDB table, added the following snippet to the template.yaml 
 ##Lambda function
 
 In AWS UI, created a new lambda function using boto3 library to converse with DynamoDb table
+
 ```
 import boto3
 import json
@@ -203,7 +204,7 @@ def lambda_handler(event, context):
         },
     }
     
-    ```
+   ```
     
     ### API gateway
     
