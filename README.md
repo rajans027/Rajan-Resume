@@ -3,8 +3,6 @@ Cloud resume challenge
 
 Created a HTML/CSS version of my resume. Used a borrowed template version and tweaked it to my liking
 
-#challenges : not familiar with CSS
-
 
 ## Step 1 - AWS setup
 Created a root account and setup MFA for added security
@@ -142,6 +140,75 @@ Frontend is complete and website is securely available on a custom Domain.
 
 ## BACKEND
 
+##DynamoDB setup
+
+The idea is to create a visitor's count functionality - API GATEWAY <----> Lambda Function <----> DynamoDB
+
+The no. of visitors would be updated every time a person opens our website. This no. will be stored and updated inside a DynamoDB table and will be updated & fetched using APIs calling Lambda functions.
+Setup a simple DynamoDB table, added the following snippet to the template.yaml file. This case requires a very basic setup — just give a name and add a partition key. Added a record to this table "view-count" to store the number of visitors
+
+```
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: cloud-resume-challenge
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions: 
+        - AttributeName: id
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: id
+          KeyType: HASH
+```
+
+##Lambda function
+
+In AWS UI, created a new lambda function using boto3 library to converse with DynamoDb table
+```
+import boto3
+import json
+import os
 
 
+def lambda_handler(event, context):
+    # Init DynamoDB Client
+    dynamodb = boto3.resource("dynamodb")
+    # Set dynamodb table name variable from env
+    #ddbTableName = os.environ["cloud-resume-challenge"]
+    table = dynamodb.Table("cloud-resume-challenge")
+    # table = dynamodb.Table("tvq-cloud-resume-counter")
 
+    # Atomic update item in table or add if doesn't exist
+    ddbResponse = table.update_item(
+        Key={"id": "view-count"},
+        UpdateExpression="ADD amount :inc",
+        ExpressionAttributeValues={":inc": 1},
+        ReturnValues="UPDATED_NEW",
+    )
+
+    # Format dynamodb response into variable
+    responseBody = json.dumps(
+        {"visitorCount": int(float(ddbResponse["Attributes"]["amount"]))}
+    )
+
+    # Create api response object
+    apiResponse = {
+        "isBase64Encoded": False,
+        "statusCode": 200,
+        "body": responseBody,
+        "headers": {
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS",
+        },
+    }
+    
+    ```
+    
+    ### API gateway
+    
+    IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
+    Indicating that the function is ok and has the right permissions. 
+    
+    
+    ## HTML AND JavaScript to use the API and display the results on the webpage
