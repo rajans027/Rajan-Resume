@@ -204,21 +204,17 @@ def lambda_handler(event, context):
         },
     }
  ```
-   
-   
-   
-  
-    ## API gateway
+ ## API gateway
     
     IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
     Indicating that the function is ok and has the right permissions. 
     
     
-    ## HTML AND JavaScript to use the API and display the results on the webpage
+## HTML AND JavaScript to use the API and display the results on the webpage
     
-```    
+    
     javascript code
-    
+```     
     async function get_visitors() {
     // call post api request function
     //await post_visitor();
@@ -226,7 +222,6 @@ def lambda_handler(event, context):
         let response = await fetch('https://1ytuhzerk9.execute-api.us-east-1.amazonaws.com/get', {
             method: 'GET',
             headers: {
-                //'x-api-key': 'JslbDfdt1F8fl7wE4CRIj1Oqidmtmzqw4lZ539Sj',
             }
         });
         let data = await response.json()
