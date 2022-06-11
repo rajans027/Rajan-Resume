@@ -3,7 +3,6 @@ Cloud resume challenge
 
 Created a HTML/CSS version of my resume. Used a borrowed template version and tweaked it to my liking
 
-refeerence https://blog.heyitschris.com/posts/get-your-foot-in-the-door-with-sam/
 
 
 ## Step 1 - AWS setup
@@ -22,7 +21,8 @@ aws-vault exec DevOpsUser -- aws s3 ls
 
 on IAM gave my new user the AmazonS3FullAccess 
 
-## Using AWS SAM using Cloud formation
+## Using AWS SAM using Cloud formation 
+A nice blog to begin with SAM https://blog.heyitschris.com/posts/get-your-foot-in-the-door-with-sam/
 Remember, SAM uses CloudFormation in the background, it translates every SAM resource into pure CF and deploys it as a stack.
 
 Install SAM using
@@ -131,10 +131,11 @@ added below contents to template.yml. Build and deploy.
 _Error encountered: Dont forget to mention in Default root object as index.html in CloudFront's distribution settings to avoid XML parsing errors_
 
 
-Moving on,  already owned a domain www.blankfolio.com which I am going to use for this project
+Moving on,  I already owned a domain www.blankfolio.com which I am going to use for this project
 Used ACM to generate a certificate for www.blankfolio.com and added routes to Route53 using the option provided (Create Records in Route53) . On my domain provider, Namecheap, updated nameservers to use the ones provided for AWS in route53.
 
 ACM created a zone for www.blankfolio.com in which I went ahead and created a simple A record enabling routing to cloudfront domain d1feck1sd1hyh2.cloudfront.net. when accessing blankfolio.com on the web
+<img width="1274" alt="image" src="https://user-images.githubusercontent.com/43797466/173186957-70e02ccb-cb80-430a-9134-7d481adb0bb1.png">
 
 
 Back in the CloudFront distribution, added **alternate domain name** value in the field given i.e www.blankfolio.com 
@@ -211,8 +212,10 @@ def lambda_handler(event, context):
  ## API gateway
     
     IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
-    Indicating that the function is ok and has the right permissions. 
+    Indicating that the function is ok and has the right permissions. API layout and what it is doing in respect to our lambda function
     
+    <img width="1311" alt="image" src="https://user-images.githubusercontent.com/43797466/173187050-3bf6c142-0ae9-4542-846a-ffcffd6a56b3.png">
+
     
 ## HTML AND JavaScript to use the API and display the results on the webpage
 Javascript code developed
@@ -287,3 +290,5 @@ jobs:
 <img width="387" alt="image" src="https://user-images.githubusercontent.com/43797466/173186388-fd4f7774-00dc-411c-8410-37d133c24bae.png">
 <img width="483" alt="image" src="https://user-images.githubusercontent.com/43797466/173186405-1a68dd66-a344-4e4a-830f-a78fc6f6bc3f.png">
 
+Here is the final product of the above hardwork, we now have a website accessible to everyone and a sneaky counter to track the number of visits. 
+https://www.blankfolio.com 
