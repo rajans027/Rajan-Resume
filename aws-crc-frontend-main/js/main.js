@@ -11,7 +11,7 @@ async function get_visitors() {
             }
         });
         let data = await response.json()
-        document.getElementById("visitors").innerHTML = data['visitorCount'] + " visits.";
+        document.getElementById("visitors").innerHTML = data['visitorCount']
         console.log(data);
         return data;
     } catch (err) {
