@@ -21,7 +21,7 @@
 function get_visitors(){
 	fetch ("https://1ytuhzerk9.execute-api.us-east-1.amazonaws.com/get")
 	.then(response => response.json())
-	.then(data => document.getElementById('visitors').innerHTML="You are visitor# "+data)
+	.then(data => document.getElementById('visitors').innerHTML="You are visitor# "+data['visitorCount'])
 	.catch(err => console.log(err));
 
 }
