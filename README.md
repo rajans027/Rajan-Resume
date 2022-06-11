@@ -3,6 +3,8 @@ Cloud resume challenge
 
 Created a HTML/CSS version of my resume. Used a borrowed template version and tweaked it to my liking
 
+refeerence https://blog.heyitschris.com/posts/get-your-foot-in-the-door-with-sam/
+
 
 ## Step 1 - AWS setup
 Created a root account and setup MFA for added security
@@ -21,6 +23,8 @@ aws-vault exec DevOpsUser -- aws s3 ls
 on IAM gave my new user the AmazonS3FullAccess 
 
 ## Using AWS SAM using Cloud formation
+Remember, SAM uses CloudFormation in the background, it translates every SAM resource into pure CF and deploys it as a stack.
+
 Install SAM using
 https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install-windows.html
 
@@ -211,9 +215,7 @@ def lambda_handler(event, context):
     
     
 ## HTML AND JavaScript to use the API and display the results on the webpage
-    
-    
-    javascript code
+Javascript code developed
 ```     
     async function get_visitors() {
     // call post api request function
@@ -236,3 +238,52 @@ def lambda_handler(event, context):
 Called this Javascript in our index.html code using the <script type='module' src="js/main.js" ></script>
 
 ## Creating CICD pipeline using Github Actions
+
+Created two gitaction pipleine, one to test the prereq and the infrastructure and the other to actually deploy the changes everytime changes our made to my Github code. For instance a push command from my local host in order to update the code. 
+
+GitAction workflow can be floud in my 
+Rajan-Resume/.github/workflows/main.yml
+
+```
+name: Infra test and deploy
+on: [push]
+jobs:
+  test_infra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out the repository
+        uses: actions/checkout@v2
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Install dependencies
+        run: 
+          pwd
+          cd Cloud-resume/tests/unit
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pytest
+
+        
+  deploy_infra:
+    needs: test_infra
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - run: cd Cloud-resume && sam build --use-container
+#       - run: cd Cloud-resume && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+      - name: Update static files with S3
+        run: aws s3 cp aws-crc-frontend-main/. s3://my-fanstastic-website/ --recursive
+```	
+
+
+<img width="387" alt="image" src="https://user-images.githubusercontent.com/43797466/173186388-fd4f7774-00dc-411c-8410-37d133c24bae.png">
+<img width="483" alt="image" src="https://user-images.githubusercontent.com/43797466/173186405-1a68dd66-a344-4e4a-830f-a78fc6f6bc3f.png">
+
