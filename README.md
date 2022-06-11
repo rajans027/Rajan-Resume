@@ -239,7 +239,7 @@ Called this Javascript in our index.html code using the <script type='module' sr
 
 ## Creating CICD pipeline using Github Actions
 
-Created two gitaction pipleine, one to test the prereq and the infrastructure and the other to actually deploy the changes everytime changes our made to my Github code. For instance a push command from my local host in order to update the code. 
+Created two gitaction pipleine set to run on "push", one to test the prereq and the infrastructure and the other to actually deploy the changes. Corresponding GitHub actions are created to configure AWS credentials, run python tests, SAM build and SAM deploy commands. GitHub secrets were used to securely store environment variables like AWS Login Keys. 
 
 GitAction workflow can be floud in my 
 Rajan-Resume/.github/workflows/main.yml
