@@ -62,7 +62,7 @@ deploy-infra:
 
 deploy-site:
 	aws-vault exec DevOpsUser --no-session -- aws s3 sync ~.\devops-project\CloudResumeRepo\aws-crc-frontend-main s3://my-fanstastic-website
- ```
+```
  
  Ran `make Deploy-site` to copy the website files over to s3 bucket using Sync command
  
@@ -71,7 +71,7 @@ deploy-site:
  
  Changes made to the MyS3Bucket in the template.yaml file
  
- ```
+```
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties: 
@@ -209,13 +209,13 @@ def lambda_handler(event, context):
         },
     }
  ```
- ## API gateway
-    
-    IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
-    Indicating that the function is ok and has the right permissions. API layout and what it is doing in respect to our lambda function
-    
-    <img width="1311" alt="image" src="https://user-images.githubusercontent.com/43797466/173187050-3bf6c142-0ae9-4542-846a-ffcffd6a56b3.png">
 
+ ## API gateway
+```    
+    IN AWS UI, set up a new REST API, further created a GET method and integerated the lambda function. Deployed the API and tested it - no errors.
+    Indicating that the function is ok and has the right permissions. 
+```    
+   
     
 ## HTML AND JavaScript to use the API and display the results on the webpage
 Javascript code developed
