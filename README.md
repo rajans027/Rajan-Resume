@@ -1,6 +1,16 @@
 
 Cloud resume challenge
 
+* Deployed an HTML resume as AWS S3 static website. Configure AWS CloudFront and OAI to make the S3 website URL to use HTTPS.
+* Configured AWS Route 53 for a custom domain name and point to the CloudFront distribution.
+* Developed a JavaScript snippet to call an AWS API Gateway with AWS Lambda as the backend, to retrieve and update the visitor count in a DynamoDB   database.
+* Infrastructure as Code - Define the API resources – DynamoDB table, API Gateway and, Lambda function in an AWS SAM template
+* Setup CI/CD using GitHub actions for backend and front end.
+
+
+
+
+
 Created a HTML/CSS version of my resume. Used a borrowed template version and tweaked it to my liking
 
 
